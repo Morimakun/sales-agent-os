@@ -1,0 +1,49 @@
+﻿# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+.next/
+.vercel/
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+prisma/dev.db
+prisma/dev.db-shm
+prisma/dev.db-wal
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Backups
+*.bak
+*.zip
+legacy-test-output/
+cc-company-backup/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude/Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

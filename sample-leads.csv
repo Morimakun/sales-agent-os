@@ -1,0 +1,6 @@
+company_name,contact_name,email,phone,website_url,contact_form_url,industry,area,source,memo,status
+（匿名）サンプル商店,田中,sample1@example.com,03-0000-0001,https://example.com/shop,https://example.com/shop/contact,小売,東京,展示会,ECサイトあり・在庫管理に課題,new
+（匿名）テスト工業,佐藤,sample2@example.com,06-0000-0002,https://example.com/kogyo,,製造,大阪,Web検索,問い合わせ対応が多い,new
+（匿名）デモ美容室,,sample3@example.com,,https://example.com/salon,https://example.com/salon/form,美容,福岡,紹介,予約管理が手動,new
+（匿名）example士業,鈴木,sample4@example.com,052-0000-0004,,,士業,名古屋,セミナー,書類作成が手作業,new
+（匿名）テストカフェ,,,,https://example.com/cafe,,飲食,札幌,SNS,SNS運用に課題,new

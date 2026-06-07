@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Product {
+  id           String   @id @default(cuid())
+  name         String
+  priceMin     Int      @default(0)
+  priceMax     Int      @default(0)
+  description  String   @default("")
+  target       String   @default("")
+  deliverables String   @default("")
+  salesAngle   String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Opportunity {
+  id               String          @id @default(cuid())
+  sourceType       String          @default("other")
+  sourceName       String          @default("")
+  url              String          @default("")
+  rawText          String          @default("")
+  companyName      String          @default("")
+  personName       String          @default("")
+  industry         String          @default("")
+  budgetHint       String          @default("")
+  candidateType    String          @default("z")
+  referrerName     String          @default("")
+  painPoints       String          @default("")
+  tools            String          @default("")
+  temperature      String          @default("medium")
+  fitScore         Int?
+  priority         String          @default("unknown")
+  status           String          @default("new")
+  painHypothesis   String          @default("")
+  offerHypothesis  String          @default("")
+  recommendedOffer String          @default("")
+  reason           String          @default("")
+  nextAction       String          @default("")
+  nextActionAt     DateTime?
+  memo             String          @default("")
+  doNotContact     Boolean         @default(false)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  drafts           OutreachDraft[]
+}
+
+model OutreachDraft {
+  id            String      @id @default(cuid())
+  opportunityId String
+  type          String
+  title         String      @default("")
+  body          String
+  model         String      @default("")
+  promptVersion String      @default("")
+  riskLevel     String      @default("")
+  createdAt     DateTime    @default(now())
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  @@index([opportunityId])
+}
+
+model Lead {
+  id              String     @id @default(cuid())
+  companyName     String     @default("")
+  contactName     String     @default("")
+  email           String     @default("")
+  phone           String     @default("")
+  websiteUrl      String     @default("")
+  contactFormUrl  String     @default("")
+  industry        String     @default("")
+  area            String     @default("")
+  source          String     @default("")
+  memo            String     @default("")
+  status          String     @default("new")
+  priority        String     @default("unknown")
+  score           Int?
+  painHypothesis  String     @default("")
+  offerHypothesis String     @default("")
+  lastContactedAt DateTime?
+  nextActionAt    DateTime?
+  doNotContact    Boolean    @default(false)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  activities      Activity[]
+  aiOutputs       AiOutput[]
+}
+
+model AiOutput {
+  id            String   @id @default(cuid())
+  leadId        String
+  type          String
+  content       String
+  model         String   @default("")
+  promptVersion String   @default("")
+  riskLevel     String   @default("")
+  createdAt     DateTime @default(now())
+  lead          Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  leadId    String
+  type      String
+  note      String   @default("")
+  createdAt DateTime @default(now())
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
