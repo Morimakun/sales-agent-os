@@ -26,7 +26,7 @@
 複数店舗でのスタッフ対応や、店舗ごとの確認業務を揃える場面を想定しています。
 
 デモ画面のイメージと申込フォームはこちらです。
-https://telecom-staff-ai-demo.vercel.app/
+https://telecom-staff-ai-demo.vercel.app/?src=heartland
 
 まずはデモをご確認いただくだけでも問題ございません。
 もしご関心があれば、15分ほど現在の確認業務についてお話を伺えれば幸いです。
@@ -50,7 +50,7 @@ morimaonline@gmail.com
 携帯ショップ運営における、店舗スタッフの案内品質や新人スタッフの確認業務の標準化を想定しています。
 
 デモ画面のイメージと申込フォームはこちらです。
-https://telecom-staff-ai-demo.vercel.app/
+https://telecom-staff-ai-demo.vercel.app/?src=bellpark
 
 まずはデモをご確認いただくだけでも問題ございません。
 もしご関心があれば、15分ほど現在の確認業務についてお話を伺えれば幸いです。
@@ -74,7 +74,7 @@ morimaonline@gmail.com
 全国規模の販売網において、店舗スタッフが接客中に社内資料を確認しやすくする用途を想定しています。
 
 デモ画面のイメージと申込フォームはこちらです。
-https://telecom-staff-ai-demo.vercel.app/
+https://telecom-staff-ai-demo.vercel.app/?src=t-gaia
 
 まずはデモをご確認いただくだけでも問題ございません。
 もしご関心があれば、15分ほど現在の確認業務についてお話を伺えれば幸いです。

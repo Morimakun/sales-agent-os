@@ -1,17 +1,8 @@
 // 全AIプロンプト定義。プロフィール + 商品メニューを system prompt に注入する。
 
+import { buildTelecomDemoLpCta } from "@/lib/telecom";
+
 export const PROMPT_VERSION = "v1";
-
-const DEFAULT_TELECOM_DEMO_LP_URL = "https://telecom-staff-ai-demo.vercel.app/";
-
-function telecomDemoLpUrl(): string {
-  const value = process.env.NEXT_PUBLIC_TELECOM_DEMO_LP_URL?.trim();
-  return value && value.length > 0 ? value : DEFAULT_TELECOM_DEMO_LP_URL;
-}
-
-function telecomDemoLpCta(): string {
-  return `デモ画面のイメージと申込フォームはこちらです。\n${telecomDemoLpUrl()}`;
-}
 
 const COMMON_RULES = `
 あなたは丁寧で誠実な営業支援アシスタントです。以下を必ず守ってください。
@@ -170,7 +161,11 @@ export function generateApplicationUser(o: Parameters<typeof opportunityContextU
   return opportunityContextUser(o);
 }
 
-export function generateFirstContactSystem(profileBlock: string, productsBlock: string): string {
+export function generateFirstContactSystem(
+  profileBlock: string,
+  productsBlock: string,
+  opportunity?: { lpSourceId?: string }
+): string {
   return `${baseSystem(profileBlock, productsBlock)}
 
 # タスク: Z向け初回連絡文の作成（完全新規候補向け）
@@ -186,7 +181,7 @@ export function generateFirstContactSystem(profileBlock: string, productsBlock: 
 - 初回連絡では Dify の直URLを入れない
 - CTA は次の2行をそのまま使う
 
-${telecomDemoLpCta()}
+${buildTelecomDemoLpCta(opportunity?.lpSourceId)}
 
 次の 2 種類を出力すること:
 
@@ -342,7 +337,7 @@ export function firstMessageSystem(profileBlock: string, productsBlock: string):
 - Dify の直URLは入れないこと。
 - CTA は次の2行をそのまま使うこと:
 
-${telecomDemoLpCta()}
+${buildTelecomDemoLpCta()}
 
 次を出力すること:
 ## 件名
@@ -362,7 +357,7 @@ export function contactFormMessageSystem(profileBlock: string, productsBlock: st
 - Dify の直URLは入れず、LP URL のみを案内すること。
 - CTA は次の2行をそのまま使うこと:
 
-${telecomDemoLpCta()}
+${buildTelecomDemoLpCta()}
 出力は本文テキストのみ(見出し不要)。`;
 }
 

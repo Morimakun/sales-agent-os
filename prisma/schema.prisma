@@ -44,6 +44,21 @@ model Opportunity {
   reason           String          @default("")
   nextAction       String          @default("")
   nextActionAt     DateTime?
+  sentAt           DateTime?
+  sentChannel      String          @default("")
+  sentTo           String          @default("")
+  sentUrl          String          @default("")
+  sentMessage      String          @default("")
+  replyStatus      String          @default("none")
+  lastReplyAt      DateTime?
+  replySummary     String          @default("")
+  replyBody        String          @default("")
+  nextActionDate   DateTime?
+  lpSourceId       String          @default("")
+  lpUrl            String          @default("")
+  lpVisited        Boolean         @default(false)
+  lpFormSubmitted  Boolean         @default(false)
+  difyOpened       Boolean         @default(false)
   memo             String          @default("")
   doNotContact     Boolean         @default(false)
   createdAt        DateTime        @default(now())

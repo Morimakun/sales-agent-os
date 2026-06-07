@@ -25,6 +25,8 @@ type OppForUser = {
   painHypothesis: string;
   offerHypothesis: string;
   recommendedOffer: string;
+  lpSourceId: string;
+  lpUrl: string;
 };
 
 /**
@@ -34,7 +36,7 @@ type OppForUser = {
 export async function runOpportunityTextGeneration(
   opportunityId: string,
   draftType: OutreachDraftType,
-  buildSystem: (profileBlock: string, productsBlock: string) => string,
+  buildSystem: (profileBlock: string, productsBlock: string, opportunity?: OppForUser) => string,
   buildUser: (o: OppForUser) => string
 ): Promise<NextResponse> {
   if (!opportunityId) {
@@ -55,7 +57,22 @@ export async function runOpportunityTextGeneration(
   const o = guard.opportunity!;
   const { profileBlock, productsBlock } = await loadAIContext();
   try {
-    const { text, model } = await callAIText(buildSystem(profileBlock, productsBlock), buildUser(o as OppForUser));
+    const opportunityForPrompt = {
+      companyName: o.companyName || "",
+      personName: o.personName || "",
+      industry: o.industry || "",
+      rawText: o.rawText || "",
+      memo: o.memo || "",
+      painHypothesis: o.painHypothesis || "",
+      offerHypothesis: o.offerHypothesis || "",
+      recommendedOffer: o.recommendedOffer || "",
+      lpSourceId: o.lpSourceId || "",
+      lpUrl: o.lpUrl || "",
+    };
+    const { text, model } = await callAIText(
+      buildSystem(profileBlock, productsBlock, opportunityForPrompt),
+      buildUser(opportunityForPrompt)
+    );
     const draft = await prisma.outreachDraft.create({
       data: {
         opportunityId,
